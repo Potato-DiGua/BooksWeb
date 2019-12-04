@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>书享-注册</title>
+    <script type="text/javascript" src="js/common.js"></script>
+    <script type="text/javascript" src="js/md5.js"></script>
+    <link rel="stylesheet" href="/css/common.css">
+    <link rel="stylesheet" href="/css/sign.css">
+</head>
+<body>
+<div id="border_div" class="border">
+    <div id="main_div">
+        <a class="title" href="/">书享</a>
+        <div class="input_div">
+            <a class="link" href="/sign_in.jsp">登录</a>
+            <b>·</b>
+            <a class="link_select" href="/sign_up.html">注册</a>
+        </div>
+        <form autocomplete="off" method="post" action="/register" id="form" onclick="return signUpCheck(this)">
+            <dl>
+                <dt><label>昵称</label></dt>
+                <dd><input class="input_text" type="text" name="name" maxlength="16" onfocusout="setName(this)"></dd>
+                <dt><label>邮箱</label></dt>
+                <dd><input class="input_text" type="email" name="email" id="input_email" onfocusout="setEmail(this)"></dd>
+                <div class="slide" style="width: 200px;overflow: hidden" id="email_error">
+                    <label style="color: red;font-size: 13px">该邮箱已注册</label>
+                </div>
+                <dt><label>密码</label></dt>
+                <dd><input class="input_text" type="password" id="pwd" onfocusin="tip(true)" onfocusout="tip(false)"></dd>
+                <div class="slide" style="width: 200px;overflow: hidden" id="tip">
+                        <label style="color: red;font-size: 13px">不能包含空格<br/>长度为8-16位<br/>必须包含字母和数字</label>
+                </div>
+                <input type="hidden" name="pwd" id="pwd_md5">
+            </dl>
+            <input class="btn btn_margin" type="submit" value="注册">
+        </form>
+    </div>
+
+</div>
+</body>
+</html>

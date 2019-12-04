@@ -1,0 +1,420 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+
+#header {
+    color: #EB705B;
+    padding: 0;
+    height: 64px;
+    margin-top: 0;
+    margin-bottom: 30px;
+    width: 100%;
+    border-bottom: 1px solid #f0f0f0;
+    box-shadow: 0 1px 5px #DBDBDB;
+}
+
+.nav_menu {
+    list-style-type: none;
+    white-space: nowrap;
+    overflow: hidden;
+    padding: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.nav_a {
+    display: block;
+    text-align: center;
+    overflow: hidden;
+    text-decoration: none;
+    color: white;
+}
+
+#menu {
+    vertical-align: top;
+    display: inline-block;
+    height: 40px;
+    float: right;
+    margin-top: 12px;
+}
+
+#menu ul {
+    height: 40px;
+    width: 200px;
+    margin-left: 3%;
+}
+
+#menu li {
+    height: 38px;
+    float: left;
+    margin-right: 5px;
+    width: 80px;
+    position: relative;
+    border-radius: 20px;
+    outline: none;
+    border: 1px solid #EA6F5A;
+}
+
+#menu li:nth-child(1) {
+    color: white;
+    background-color: #EA6F5A;
+}
+
+#menu li:nth-child(1):hover {
+    background-color: #df6b57;
+}
+
+#menu li:nth-child(1) a {
+    color: white;
+}
+
+#menu li:nth-child(2) {
+    background-color: white;
+}
+
+#menu li:nth-child(2) a {
+    color: #EA6F5A;
+}
+
+#menu li:nth-child(2):hover {
+    background-color: #F1F1F1;
+}
+
+
+#menu li a {
+    line-height: 35px;
+}
+
+#main {
+    margin: 15px auto;
+    width: 1280px
+}
+
+#left {
+    background-color: #EF6F61;
+    display: block;
+    float: left;
+    width: 180px;
+    height: 600px;
+    margin-left: 88px;
+    margin-bottom: 35px;
+    padding: 25px 0;
+    text-align: center;
+
+}
+
+#nav_div {
+    z-index: 1;
+    margin-top: 25px;
+}
+
+
+#nav_div > ul > li {
+    background-color: transparent;
+}
+
+#nav_div > ul > li:hover {
+    background-color: #F79389;
+}
+
+.second_menu {
+    margin: 0;
+    padding: 0;
+    display: none;
+}
+
+.second_menu li {
+    padding: 5px 0;
+    color: white;
+    background-color: transparent;
+}
+
+.second_menu li:hover {
+    background-color: #F7AEA6;
+}
+
+#nav_div ul li:hover ul.second_menu {
+    display: block;
+}
+
+#nav_div > ul > li > a {
+    color: white;
+    font-size: 18px;
+    font-family: "Microsoft YaHei";
+}
+
+#right {
+    display: block;
+    line-height: 5px;
+    width: 860px;
+    margin-left: 290px;
+    padding: 20px;
+    font-size: medium;
+    border: 1px solid #e1e4e8;
+    min-height: 700px;
+}
+
+#bottom {
+    border-top: 1px solid #e1e4e8;
+    /*box-shadow: 0 -1px 3px #DBDBDB;*/
+    display: block;
+    height: 100px;
+    width: 100%;
+    text-align: center;
+    margin-top: 35px;
+    padding: 5px 0;
+    clear: both;
+}
+
+.btn {
+    text-align: center;
+    width: 200px; /* 宽度 */
+    height: 35px; /* 高度 */
+    border-width: 0px; /* 边框宽度 */
+    border-radius: 20px; /* 边框半径 */
+    background: #1E90FF; /* 背景颜色 */
+    cursor: pointer; /* 鼠标移入按钮范围时出现手势 */
+    outline: none; /* 不显示轮廓线 */
+    font-family: Microsoft YaHei; /* 设置字体 */
+    color: white; /* 字体颜色 */
+    font-size: 17px; /* 字体大小 */
+}
+
+.btn:hover {
+    background: #5599FF;
+}
+
+.input_text {
+    background-color: white;
+    outline-style: none;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    padding: 5px 10px;
+    width: 200px;
+    font-size: 15px;
+    font-family: "Microsoft YaHei";
+}
+
+.input_text_error {
+    outline-style: none;
+    border: 1px solid red;
+    border-radius: 3px;
+    padding: 5px 10px;
+    width: 200px;
+    font-size: 15px;
+    font-family: "Microsoft YaHei", serif;
+}
+
+.link {
+    color: #000000;
+    text-decoration: none;
+    border-bottom: 0;
+    padding-bottom: 10px;
+}
+
+.link:hover {
+    color: #df6b57;
+    border-bottom: 3px solid #df6b57;
+}
+
+.link_select {
+    color: #df6b57;
+    text-decoration: none;
+    border-bottom: 3px solid #df6b57;
+    padding-bottom: 10px;
+}
+
+.border {
+    border: 1px solid #e1e4e8;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px #DBDBDB;
+}
+
+.container {
+    margin: 0 auto;
+    height: 100%;
+    width: 1200px;
+}
+
+.search_div {
+    vertical-align: top;
+    margin-left: 80px;
+    display: inline-block;
+    padding: 12px 0;
+    height: 40px;
+    position: relative;
+}
+
+.search {
+    width: 200px;
+    height: 40px;
+    border-radius: 18px;
+    outline: none;
+    border: 1px solid #ccc;
+    padding-left: 20px;
+    transition: all 1s ease;
+}
+
+.search:focus {
+    width: 350px;
+}
+
+.search_btn {
+    margin: 0 auto;
+    height: 25px;
+    width: 25px;
+    padding: 0;
+    position: absolute;
+    display: inline-block;
+    background: url("/picture/search.png") no-repeat center center;
+    background-size: 100% 100%;
+    top: 20px;
+    right: 15px;
+    border: none;
+    outline: none;
+    cursor: pointer;
+}
+
+.title {
+    display: block;
+    text-align: center;
+    width: 100%;
+    font-size: 35px;
+    color: #df6b57;
+    text-decoration: none;
+}
+
+.title:hover {
+    color: #df4503;
+}
+
+.slide {
+    opacity: 0;
+    height: 0;
+    transition: all 800ms ease;
+}
+
+.book_list {
+    width: 840px;
+    list-style-type: none;
+    white-space: nowrap;
+    overflow: hidden;
+    margin: 0 auto;
+    padding: 0;
+    color: black;
+}
+
+.book_item {
+    width: 190px;
+    height: 307px;
+    margin: 10px 5px 5px 5px;
+    padding: 5px;
+    border-radius: 5px;
+    outline: none;
+    float: left;
+}
+
+.cover {
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    height: 200px;
+}
+.cover_div{
+    text-align: center;
+    width: 135px;
+    height: 200px;
+    overflow: hidden;
+}
+.w150{
+    vertical-align: top;
+    display: inline-block;
+    width: 150px;
+}
+
+.book_item:hover {
+    box-shadow: 0 0 5px #DBDBDB;
+}
+
+.book_item_div {
+    text-align: center;
+}
+
+.book_item_p {
+    color: black;
+    line-height: 20px;
+}
+.font{
+    font-size: 15px;
+    font-family: 'Microsoft YaHei'
+}
+.pl{
+    color: #666666;
+    margin-right: 5px;
+}
+
+.error_div {
+    width: 100%;
+    top: 35px;
+    height: 50px;
+    position: absolute;
+    overflow: hidden;
+    animation: slide_up 1s ease;
+    animation-delay: 3s;
+    animation-fill-mode: forwards;
+    text-align: center;
+}
+
+.error_tip {
+    position: relative;
+    border: 1px solid #df6b57;
+    line-height: 48px;
+    font-size: 15px;
+    border-radius: 5px;
+    color: red;
+    padding: 8px;
+}
+
+@keyframes slide_up {
+    from {
+    }
+    to {
+        height: 0;
+        opacity: 0;
+    }
+}
+
+.title_h1 {
+    line-height: 64px;
+    margin: 0;
+    width: 100px;
+    display: inline;
+    vertical-align: top;
+    float: left;
+    color: #EB705B;
+}
+.divider{
+    height: 2px;
+    background: linear-gradient(to right,transparent,#EB705B,transparent);
+}
+.btn_revise{
+    border: 1px solid #EB705B;
+    height: 35px;
+    width: 100px;
+    line-height: 35px;
+    float: right;
+    border-radius: 20px;
+    color: #EB705B;
+}
+.btn_revise:hover{
+    background: #f2f5f9;
+}
+.text_div{
+    min-height: 300px;
+}
+.text_div p{
+    word-wrap: break-word;
+    word-break: break-all;
+    line-height: 30px;
+}

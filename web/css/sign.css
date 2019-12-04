@@ -1,0 +1,40 @@
+body {
+    background-color: #F1F1F1;
+}
+
+dd {
+    margin: 0;
+}
+
+dt {
+    font-size: 14px;
+    margin-top: 10px;
+    margin-bottom: 3px;
+}
+
+#border_div {
+    margin: 150px auto;
+    width: 400px;
+    border: 1px solid #e1e4e8;
+    border-radius: 15px;
+    background-color: #ffffff;
+}
+
+#main_div{
+    width: 180px;
+    margin: 20px auto;
+}
+
+.input_div {
+    text-align: center;
+    margin-bottom: 40px;
+    font-size: 18px;
+}
+.btn_margin{
+    margin-top: 30px;
+    margin-bottom: 50px;
+}
+.title{
+    margin-top: 60px;
+    margin-bottom: 35px;
+}
