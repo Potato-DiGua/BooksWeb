@@ -16,7 +16,7 @@
             <b>·</b>
             <a class="link_select" href="/sign_up.html">注册</a>
         </div>
-        <form autocomplete="off" method="post" action="/register" id="form" onclick="return signUpCheck(this)">
+        <form autocomplete="off" method="post" action="/register" id="form" onsubmit="return signUpCheck(this)">
             <dl>
                 <dt><label>昵称</label></dt>
                 <dd><input class="input_text" type="text" name="name" maxlength="16" onfocusout="setName(this)"></dd>

@@ -127,7 +127,7 @@
             </form>
             <p id="update_tip"></p>
         </div>
-        <form method="post" action="/upload/book">
+        <form method="post" action="/upload/book" onsubmit="return checkEmpty(this)">
             <input name="cover" type="hidden" id="input_cover" value="<%=book!=null?book.getCovers():""%>">
             <table>
                 <tr>

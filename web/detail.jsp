@@ -69,6 +69,10 @@
             <p><%=str%></p>
             <%} book=null;%>
         </div>
+        <h3 style="color: #EA6F5A">联系方式：</h3>
+        <div class="text_div">
+            <p><span class="pl">手机:</span></p>
+        </div>
     </div>
 
 </div>

@@ -24,13 +24,36 @@ function signUpCheck(form) {
 
     var name = formData.get("name");
     var email = formData.get("email");
-    if (name == null || email == null || pwd.value == null ||
-        name === "" || !checkEmail(email) || !checkPwd(pwd.value)) {
+    if (isEmpty(name) || email == null || pwd.value == null ||
+         !checkEmail(email) || !checkPwd(pwd.value)) {
         return false;
     }
     pwd_md5.value = hex_md5(pwd.value);
     console.log("sin_up success");
     return true;
+}
+
+/**
+ * 校验表单是否为空
+ * @param form
+ * @returns {boolean}
+ */
+function checkEmpty(form)
+{
+    let formData = new FormData(form);
+    for(let value of formData.values())
+    {
+        if(isEmpty(value))
+        {
+            alert("不能为空");
+            return false;
+        }
+    }
+    console.log("true");
+    return false;
+}
+function isEmpty(s) {
+    return (s==null||s=="");
 }
 
 /**
@@ -121,6 +144,17 @@ function checkEmail(s) {
 }
 
 /**
+ * 检查手机号的有效性
+ * @param phone
+ * @returns {boolean}
+ */
+function checkPhone(phone) {
+    if(isEmpty(phone))
+        return false;
+    const re=/^((13[0-9])|(14[5-9])|(15[0-3,5-9])|(16[2,5,6,7])|(17[0-8])|(18[0-9])|(19[1,3,5,8,9]))\d{8}$/
+    return re.test(phone);
+}
+/**
  * 向下滑动动画
  * @param element
  * @param height 元素高度
@@ -148,6 +182,9 @@ function tip(isShow) {
         setPwd()
 }
 
+/**
+ * 高亮搜索文字
+ */
 function highLight() {
     //DFS(document.body,"三体");
     const element = document.getElementById("right");
@@ -160,6 +197,9 @@ function highLight() {
     element.innerHTML = element.innerHTML.replace(re, "$1<mark>$2</mark>$3");
 }
 
+/**
+ * 上传文件
+ */
 function uploadFile() {
     let file = document.getElementById("upload_file");
     if (file.value == null)
@@ -189,8 +229,17 @@ function uploadFile() {
     xhr.open("POST", "/upload/cover", true);
     xhr.send(formData);
 }
-function deleteBook(a,id) {
 
+/**
+ * 删除图书
+ * @param a  a标签
+ * @param id  图书ID
+ */
+function deleteBook(a,id) {
+    if(!confirm("你确定要删除吗"))
+    {
+        return;
+    }
     let xhr = new XMLHttpRequest();
     xhr.onreadystatechange = function () {
         if (xhr.readyState == 4) {

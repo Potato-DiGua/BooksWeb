@@ -26,7 +26,7 @@
         </div>
 
 
-        <form autocomplete="off" action="/login" method="post" id="form" onclick="return check(this)">
+        <form autocomplete="off" action="/login" method="post" id="form" onsubmit="return check(this)">
             <dl>
                 <dt><label>邮箱</label></dt>
                 <dd><input class="input_text" type="email" name="email"></dd>
