@@ -67,11 +67,12 @@
             <% String[] strings = book.getDescription().split("\n");
                 for (String str : strings) {%>
             <p><%=str%></p>
-            <%} book=null;%>
+            <%}%>
         </div>
-        <h3 style="color: #EA6F5A">联系方式：</h3>
-        <div class="text_div">
-            <p><span class="pl">手机:</span></p>
+        <h3 style="color: #EA6F5A">联系方式:</h3>
+        <div style="line-height: 15px;">
+            <p><span class="pl">邮箱:</span><%=book.getUser().getEmail()%></p>
+            <p><span class="pl">手机:</span><%=book.getPhone()%></p>
         </div>
     </div>
 

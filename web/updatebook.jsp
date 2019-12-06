@@ -12,11 +12,12 @@
 <html>
 <head>
     <title>书享</title>
-    <%@include file="master/head.jsp"%>
+    <%@include file="master/head.jsp" %>
     <style type="text/css">
         tr {
             height: 40px;
         }
+
         #right {
             text-align: center;
         }
@@ -82,8 +83,6 @@
 <%@include file="master/header.jsp" %>
 <div id="main">
         <%!
-        BookInfo book=null;
-        String id=null;
         void error(HttpServletResponse response) {
             try {
                 PrintWriter pw = response.getWriter();
@@ -101,7 +100,8 @@
         }
     %>
         <%
-        id = request.getParameter("id");
+        BookInfo book=null;
+        String id = request.getParameter("id");
         if (id != null && !id.isEmpty()) {
             book = MySql.getBookInfo(id);
             if(user.getId()!=book.getUser().getId())
@@ -109,7 +109,10 @@
                 error(response);
             }
         }else
-            id=null;
+            {
+                id=null;
+            }
+
     %>
 
     <%@include file="master/left.jsp" %>
@@ -127,7 +130,7 @@
             </form>
             <p id="update_tip"></p>
         </div>
-        <form method="post" action="/upload/book" onsubmit="return checkEmpty(this)">
+        <form method="post" action="/upload/book" onsubmit="return checkBook(this)">
             <input name="cover" type="hidden" id="input_cover" value="<%=book!=null?book.getCovers():""%>">
             <table>
                 <tr>
@@ -158,9 +161,21 @@
                     </td>
                 </tr>
                 <tr>
+                    <td>
+                        <span class="pl">手机：</span>
+                    </td>
+                    <td>
+                        <input autocomplete="false" name="phone" class="input_text" type="text" maxlength="11"
+                               value="<%=book!=null?book.getPhone():""%>" onfocusout="setPhone(this)">
+                        <span id="error_phone_tip" style="color:red;display: none;">请输入有效手机号码</span>
+                    </td>
+                </tr>
+                <tr>
                     <td style="vertical-align: top"><span class="pl">简介：</span></td>
                     <td>
-                        <textarea name="desc" rows="10" cols="80" minlength="10" maxlength="500" style="font-size: 18px"><%=book!=null?book.getDescription():""%></textarea>
+                        <textarea name="desc" rows="10" cols="80" minlength="10" maxlength="500"
+                                  placeholder="请输入至少10个字符，最多500个字符。"
+                                  style="font-size: 18px"><%=book != null ? book.getDescription() : ""%></textarea>
                     </td>
                 </tr>
             </table>

@@ -96,7 +96,7 @@ body {
     display: block;
     float: left;
     width: 180px;
-    height: 600px;
+    min-height: 500px;
     margin-left: 88px;
     margin-bottom: 35px;
     padding: 25px 0;
@@ -411,7 +411,8 @@ body {
     background: #f2f5f9;
 }
 .text_div{
-    min-height: 300px;
+    margin-top: 20px;
+    margin-bottom: 40px;
 }
 .text_div p{
     word-wrap: break-word;

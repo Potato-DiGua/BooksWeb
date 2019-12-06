@@ -33,6 +33,7 @@ public class UploadServlet extends HttpServlet {
         bookInfo.setPublishingHouse(request.getParameter("pub"));
         bookInfo.setDescription(request.getParameter("desc"));
         bookInfo.setCovers(request.getParameter("cover"));
+        bookInfo.setPhone(request.getParameter("phone"));
         if(bookInfo.hasNull())
         {
             PrintWriter pw=response.getWriter();

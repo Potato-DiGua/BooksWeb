@@ -1,6 +1,7 @@
 <%@ page import="java.util.List" %>
 <%@ page import="zzl.sql.MySql" %>
-<%@ page import="zzl.beans.BookInfo" %><%--
+<%@ page import="zzl.beans.BookInfo" %>
+<%@ page import="java.io.PrintWriter" %><%--
   Created by IntelliJ IDEA.
   User: 86543
   Date: 2019/12/2
@@ -20,7 +21,8 @@
             width: 500px;
             display: inline;
         }
-        .a_text:hover{
+
+        .a_text:hover {
             color: #EF6F61;
         }
 
@@ -31,7 +33,8 @@
             display: inline-block;
             vertical-align: top;
         }
-        .fr a{
+
+        .fr a {
             margin: 0 5px;
             line-height: 30px;
             color: #349EDF;
@@ -52,14 +55,31 @@
         <ul class="nav_menu">
             <%
                 User user = (User) session.getAttribute("user");
+                boolean isAdmin = false;
                 if (user == null) {
                     response.sendRedirect("/sign_in.jsp");
                     return;
                 }
-                List<BookInfo> list = MySql.getUserShareBooks(user.getId());
+                String type = request.getParameter("type");
+                List<BookInfo> list = null;
+                if (type != null && type.equals("admin")) {
+                    //判断是否为管理权限
+                    if (user.getPermission().equals("1")) {
+                        isAdmin = true;
+                        list = MySql.getAllBooks();
+                    } else {
+                        response.setCharacterEncoding("UTF-8");
+                        PrintWriter pw = response.getWriter();
+                        pw.println("You aren't administrator");
+                        pw.close();
+                        return;
+                    }
+
+                } else {
+                    list = MySql.getUserShareBooks(user.getId());
+                }
                 for (BookInfo book : list) {
             %>
-
             <li>
                 <div>
                     <a class="nav_a a_text" href="/detail.jsp?id=<%=book.getId()%>"><%=book.getName()%>
@@ -68,8 +88,11 @@
                     </a>
                     <div class="fr">
                         <a class="nav_a" href="/detail.jsp?id=<%=book.getId()%>">查看</a>
+                        <%if (!isAdmin) {%>
                         <a class="nav_a" href="/updatebook.jsp?id=<%=book.getId()%>">编辑</a>
-                        <a class="nav_a" style="color: red" href="javascript:void(0)" onclick="deleteBook(this,<%=book.getId()%>)">删除</a>
+                        <%}%>
+                        <a class="nav_a" style="color: red" href="javascript:void(0)"
+                           onclick="deleteBook(this,<%=book.getId()%>)">删除</a>
                     </div>
                 </div>
 

@@ -17,11 +17,8 @@ public class MySql {
     private final static String DATABASE_PWD = "Zzl123456";
     private final static String JDBC_NAME = "com.mysql.cj.jdbc.Driver";
     public final static String REGISTER_SQL = "insert into user (email,pwd,u_name) values (?,?,?)";
-    private final static String INSERT_BOOK_SQL = "insert into books (name,author,covers,pub_house,description,u_id) values (?,?,?,?,?,?)";
-    private final static String UPDATE_BOOK_SQL = "update books set name=?,author=?,covers=?,pub_house=?,description=?,u_id=? where idbooks=?";
     private final static String CHECK_EMAIL_SQL = "SELECT email from user where email=?";
     private final static String GET_BOOK_LIST_SQL = "select idbooks,name,author,covers from books";
-    private final static String GET_BOOK_SQL = "select name,author,covers,pub_house,description,u_name,user.u_id,permission from books,user where books.u_id=user.u_id and idbooks=?";
 
     public static Connection getConnection() {
         /*
@@ -148,18 +145,37 @@ public class MySql {
         }
         return false;
     }
+    public static List<BookInfo> getAllBooks()
+    {
+        return getUserShareBooks(0,true);
+    }
     public static List<BookInfo> getUserShareBooks(int userID)
     {
+        return getUserShareBooks(userID,false);
+    }
+    public static List<BookInfo> getUserShareBooks(int userID,boolean isAdmin)
+    {
         List<BookInfo> list=new LinkedList<>();
-        String sql="select name,author,pub_house,idbooks from books where u_id=?";
+        String sql;
+        if(isAdmin)
+        {
+            sql="select name,author,pub_house,idbooks from books";
+        }else{
+            sql="select name,author,pub_house,idbooks from books where u_id=?";
+        }
+
         getData(sql, new OnResultSetHandler() {
             @Override
             public void setPreparedStatement(PreparedStatement ps) {
-                try {
-                    ps.setInt(1,userID);
-                } catch (SQLException e) {
-                    e.printStackTrace();
+                if(!isAdmin)
+                {
+                    try {
+                        ps.setInt(1,userID);
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                    }
                 }
+
             }
 
             @Override
@@ -184,7 +200,8 @@ public class MySql {
     }
     public static BookInfo getBookInfo(String id) {
 
-        return (BookInfo) getData(GET_BOOK_SQL, new OnResultSetHandler() {
+        final String sql = "select name,author,covers,pub_house,description,phone,u_name,user.u_id,permission,email from books,user where books.u_id=user.u_id and idbooks=?";
+        return (BookInfo) getData(sql, new OnResultSetHandler() {
             @Override
             public void setPreparedStatement(PreparedStatement ps) {
                 try {
@@ -204,10 +221,14 @@ public class MySql {
                         bookInfo.setCovers(rs.getString("covers"));
                         bookInfo.setPublishingHouse(rs.getString("pub_house"));
                         bookInfo.setDescription(rs.getString("description"));
+                        bookInfo.setPhone(rs.getString("phone"));
+
                         User user = new User();
+
                         user.setName(rs.getString("u_name"));
                         user.setId(rs.getInt("u_id"));
                         user.setPermission(rs.getString("permission"));
+                        user.setEmail(rs.getString("email"));
                         bookInfo.setUser(user);
                         return bookInfo;
                     }
@@ -268,42 +289,45 @@ public class MySql {
      * @return
      */
     public static int updateBook(BookInfo bookInfo, int id, int bookID) {
-        int enterInfoId = -1;
+        int updatedBookId = -1;
         PreparedStatement psm = null;
         Connection connection = null;
-
+        String insertSQL = "insert into books (name,author,covers,pub_house,description,phone,u_id) values (?,?,?,?,?,?,?)";
+        String updateSQL = "update books set name=?,author=?,covers=?,pub_house=?,description=?,phone=?,u_id=? where idbooks=?";
         try {
             connection = getConnection();
             assert connection != null;
             if (bookID <= 0) {
-                psm = connection.prepareStatement(INSERT_BOOK_SQL, Statement.RETURN_GENERATED_KEYS);
+                psm = connection.prepareStatement(insertSQL, Statement.RETURN_GENERATED_KEYS);
             } else {
-                psm = connection.prepareStatement(UPDATE_BOOK_SQL);
+                psm = connection.prepareStatement(updateSQL);
             }
             psm.setString(1, bookInfo.getName());
             psm.setString(2, bookInfo.getAuthor());
             psm.setString(3, bookInfo.getCovers());
             psm.setString(4, bookInfo.getPublishingHouse());
             psm.setString(5, bookInfo.getDescription());
-            psm.setInt(6, id);
+            psm.setString(6,bookInfo.getPhone());
+            psm.setInt(7, id);
+
             if (bookID > 0)
-                psm.setInt(7, bookID);
+                psm.setInt(8, bookID);
             psm.executeUpdate();
             if(bookID<=0)
             {
                 ResultSet rst = psm.getGeneratedKeys();
                 if (rst.next()) {
-                    enterInfoId = rst.getInt(1);
+                    updatedBookId = rst.getInt(1);
                 }
             }else
-                enterInfoId=bookID;
+                updatedBookId=bookID;
 
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
             closeConnection(psm, connection);
         }
-        return enterInfoId;
+        return updatedBookId;
     }
 
     /**

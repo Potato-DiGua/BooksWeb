@@ -21,18 +21,27 @@
                 </ul>
             </li>
             <%
-                if (session.getAttribute("user")!= null) {
+                User leftUser = (User) session.getAttribute("user");
+                if (leftUser != null) {
             %>
             <li>
                 <a class="nav_a">个人中心</a>
                 <ul class="second_menu">
                     <li>
                         <a class="nav_a" href="${pageContext.request.contextPath}/manage.jsp">管理</a>
-
                     </li>
                 </ul>
             </li>
             <%
+                if (leftUser.getPermission().equals("1")) {
+
+
+            %>
+            <li>
+                <a class="nav_a" href="${pageContext.request.contextPath}/manage.jsp?type=admin">后台管理</a>
+            </li>
+            <%
+                    }
                 }
             %>
         </ul>

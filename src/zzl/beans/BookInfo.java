@@ -7,7 +7,16 @@ public class BookInfo {
     private String covers;
     private String publishingHouse;
     private String description;
+    private String phone;
     private User user=null;
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
 
     public User getUser() {
         return user;

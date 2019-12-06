@@ -25,7 +25,7 @@ function signUpCheck(form) {
     var name = formData.get("name");
     var email = formData.get("email");
     if (isEmpty(name) || email == null || pwd.value == null ||
-         !checkEmail(email) || !checkPwd(pwd.value)) {
+        !checkEmail(email) || !checkPwd(pwd.value)) {
         return false;
     }
     pwd_md5.value = hex_md5(pwd.value);
@@ -33,27 +33,42 @@ function signUpCheck(form) {
     return true;
 }
 
+function checkBook(form) {
+    let formData = new FormData(form);
+    let b=checkEmpty(formData);
+    if(b)
+    {
+        if(checkPhone(formData.get("phone")))
+        {
+            return true;
+        }else
+        {
+            alert("请输入有效手机号码");
+            return false;
+        }
+    }else {
+        alert("不能为空");
+        return false;
+    }
+
+
+}
 /**
  * 校验表单是否为空
  * @param form
  * @returns {boolean}
  */
-function checkEmpty(form)
-{
-    let formData = new FormData(form);
-    for(let value of formData.values())
-    {
-        if(isEmpty(value))
-        {
-            alert("不能为空");
+function checkEmpty(formData) {
+    for (let value of formData.values()) {
+        if (isEmpty(value)) {
             return false;
         }
     }
-    console.log("true");
-    return false;
+    return true;
 }
+
 function isEmpty(s) {
-    return (s==null||s=="");
+    return (s == null || s == "");
 }
 
 /**
@@ -143,17 +158,28 @@ function checkEmail(s) {
 
 }
 
+function setPhone(phoneInput) {
+    let error_p=phoneInput.nextElementSibling;
+    let b=checkPhone(phoneInput.value);
+    setRedBorder(phoneInput,b);
+    if (b) {
+        error_p.style.display="none";
+    } else {
+        error_p.style.display="inline";
+    }
+}
 /**
  * 检查手机号的有效性
  * @param phone
  * @returns {boolean}
  */
 function checkPhone(phone) {
-    if(isEmpty(phone))
+    if (isEmpty(phone))
         return false;
-    const re=/^((13[0-9])|(14[5-9])|(15[0-3,5-9])|(16[2,5,6,7])|(17[0-8])|(18[0-9])|(19[1,3,5,8,9]))\d{8}$/
+    const re = /^((13[0-9])|(14[5-9])|(15[0-3,5-9])|(16[2,5,6,7])|(17[0-8])|(18[0-9])|(19[1,3,5,8,9]))\d{8}$/
     return re.test(phone);
 }
+
 /**
  * 向下滑动动画
  * @param element
@@ -202,8 +228,11 @@ function highLight() {
  */
 function uploadFile() {
     let file = document.getElementById("upload_file");
-    if (file.value == null)
+    if (isEmpty(file.value)) {
+        alert("请选择文件");
         return;
+    }
+
     let form = document.getElementById("update_form");
     let formData = new FormData(form);
     let p = document.getElementById("update_tip");
@@ -213,7 +242,7 @@ function uploadFile() {
         if (xhr.readyState == 4) {
             if (xhr.responseText != null || xhr.responseText != "") {
                 obj = JSON.parse(xhr.responseText);
-                if (typeof obj == "object"&&obj.status=="ok") {
+                if (typeof obj == "object" && obj.status == "ok") {
                     p.innerText = "上传成功";
                     input.value = obj.data;
                 } else {
@@ -235,9 +264,8 @@ function uploadFile() {
  * @param a  a标签
  * @param id  图书ID
  */
-function deleteBook(a,id) {
-    if(!confirm("你确定要删除吗"))
-    {
+function deleteBook(a, id) {
+    if (!confirm("你确定要删除吗")) {
         return;
     }
     let xhr = new XMLHttpRequest();
@@ -246,10 +274,9 @@ function deleteBook(a,id) {
             if (xhr.responseText != null || xhr.responseText != "") {
                 obj = JSON.parse(xhr.responseText);
                 console.log(xhr.responseText);
-                if (typeof obj == "object"&&obj.status=="ok") {
-                    if(obj.data)
-                    {
-                        let li=a.parentElement.parentElement.parentElement;
+                if (typeof obj == "object" && obj.status == "ok") {
+                    if (obj.data) {
+                        let li = a.parentElement.parentElement.parentElement;
                         li.parentElement.removeChild(li);
                         return;
                     }
@@ -258,6 +285,6 @@ function deleteBook(a,id) {
             alert("删除失败");
         }
     };
-    xhr.open("GET", "/delete?id="+id, true);
+    xhr.open("GET", "/delete?id=" + id, true);
     xhr.send(null);
 }
