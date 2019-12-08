@@ -1,5 +1,5 @@
 <%@ page import="java.util.List" %>
-<%@ page import="zzl.sql.MySql" %>
+<%@ page import="zzl.dao.MySql" %>
 <%@ page import="zzl.beans.BookInfo" %>
 <%@ page import="java.io.PrintWriter" %><%--
   Created by IntelliJ IDEA.

@@ -1,4 +1,4 @@
-package zzl.sql;
+package zzl.dao;
 
 import zzl.beans.BookInfo;
 import zzl.beans.User;
@@ -263,7 +263,7 @@ public class MySql {
             public Object handleResult(ResultSet rs) {
                 try {
                     if (rs.next()) {
-                        if (rs.getString("pwd").equals(pwd)) ;
+                        if (rs.getString("pwd").equals(pwd))
                         {
                             User user = new User();
                             user.setEmail(email);

@@ -218,7 +218,7 @@ function highLight() {
     console.log(s);
     if (s == null || s == "")
         return;
-    const re = new RegExp("(>[^<]*)(" + s + ")(.*?<)", "g");
+    const re = new RegExp("(>[^<]*?)(" + s + ")(.*?<)", "g");
     console.log(re);
     element.innerHTML = element.innerHTML.replace(re, "$1<mark>$2</mark>$3");
 }

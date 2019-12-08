@@ -1,7 +1,7 @@
 <%@ page import="zzl.beans.User" %>
 <%@ page import="zzl.beans.BookInfo" %>
 <%@ page import="java.util.List" %>
-<%@ page import="zzl.sql.MySql" %><%--
+<%@ page import="zzl.dao.MySql" %><%--
   Created by IntelliJ IDEA.
   User: 86543
   Date: 2019/11/23

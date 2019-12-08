@@ -1,6 +1,6 @@
 <%@ page import="zzl.beans.BookInfo" %>
 <%@ page import="zzl.beans.User" %>
-<%@ page import="zzl.sql.MySql" %>
+<%@ page import="zzl.dao.MySql" %>
 <%@ page import="java.io.PrintWriter" %>
 <%@ page import="java.io.IOException" %><%--
   Created by IntelliJ IDEA.
@@ -43,7 +43,7 @@
                 error(response);
             }
             User user = (User) session.getAttribute("user");
-            if (user != null && (user.getId() == book.getUser().getId() || user.getPermission().equals("1"))) {
+            if (user != null && user.getId() == book.getUser().getId()) {
         %>
         <a class="nav_a btn_revise" href="updatebook.jsp?id=<%=id%>">修改</a>
         <%}%>

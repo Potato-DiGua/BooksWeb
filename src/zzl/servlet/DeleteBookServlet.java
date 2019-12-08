@@ -3,7 +3,7 @@ package zzl.servlet;
 import com.google.gson.Gson;
 import zzl.beans.Result;
 import zzl.beans.User;
-import zzl.sql.MySql;
+import zzl.dao.MySql;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

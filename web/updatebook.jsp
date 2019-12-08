@@ -1,7 +1,7 @@
 <%@ page import="java.io.PrintWriter" %>
 <%@ page import="java.io.IOException" %>
 <%@ page import="zzl.beans.BookInfo" %>
-<%@ page import="zzl.sql.MySql" %><%--
+<%@ page import="zzl.dao.MySql" %><%--
   Created by IntelliJ IDEA.
   User: 86543
   Date: 2019/11/30

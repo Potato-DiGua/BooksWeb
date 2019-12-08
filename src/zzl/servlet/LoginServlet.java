@@ -1,6 +1,6 @@
 package zzl.servlet;
 
-import zzl.sql.MySql;
+import zzl.dao.MySql;
 import zzl.beans.User;
 
 import javax.servlet.ServletException;

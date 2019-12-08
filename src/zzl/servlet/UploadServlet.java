@@ -2,7 +2,7 @@ package zzl.servlet;
 
 import zzl.beans.BookInfo;
 import zzl.beans.User;
-import zzl.sql.MySql;
+import zzl.dao.MySql;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
