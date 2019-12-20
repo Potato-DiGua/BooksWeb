@@ -98,8 +98,7 @@
         if (user == null) {
             response.sendRedirect("/sign_in.jsp");
         }
-    %>
-        <%
+
         BookInfo book=null;
         String id = request.getParameter("id");
         if (id != null && !id.isEmpty()) {

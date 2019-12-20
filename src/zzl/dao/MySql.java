@@ -65,6 +65,46 @@ public class MySql {
     }
 
     /**
+     * 插入数据
+     *
+     * @param sql
+     * @param values
+     */
+    public static int insertData(String sql, String[] values) {
+        PreparedStatement psm = null;
+        Connection connection = null;
+        try {
+            connection = getConnection();
+            assert connection != null;
+            psm = connection.prepareStatement(sql);
+            for (int i = 0; i < values.length; i++) {
+                psm.setString(i + 1, values[i]);
+            }
+            return psm.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            closeConnection(psm, connection);
+        }
+        return 0;
+    }
+
+    private static void closeConnection(PreparedStatement psm, Connection connection) {
+        try {
+            if (psm != null) {
+                psm.close();
+                psm = null;
+            }
+            if (connection != null) {
+                connection.close();
+                connection = null;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
      * 检验邮箱是否注册
      *
      * @param email
@@ -330,45 +370,7 @@ public class MySql {
         return updatedBookId;
     }
 
-    /**
-     * 插入数据
-     *
-     * @param sql
-     * @param values
-     */
-    public static int insertData(String sql, String[] values) {
-        PreparedStatement psm = null;
-        Connection connection = null;
-        try {
-            connection = getConnection();
-            assert connection != null;
-            psm = connection.prepareStatement(sql);
-            for (int i = 0; i < values.length; i++) {
-                psm.setString(i + 1, values[i]);
-            }
-            return psm.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            closeConnection(psm, connection);
-        }
-        return 0;
-    }
 
-    private static void closeConnection(PreparedStatement psm, Connection connection) {
-        try {
-            if (psm != null) {
-                psm.close();
-                psm = null;
-            }
-            if (connection != null) {
-                connection.close();
-                connection = null;
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
 
     private interface OnResultSetHandler {
         void setPreparedStatement(PreparedStatement ps);

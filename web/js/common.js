@@ -6,10 +6,21 @@
 function check(form) {
     var formData = new FormData(form);
     var pwd = document.getElementById("pwd");
-    var pwd_md5 = document.getElementById("pwd_md5");
-    pwd_md5.value = hex_md5(pwd.value);
-    console.log(checkEmail(formData.get("email")));
-    return true;
+    var email=formData.get("email");
+    if(isEmpty(pwd.value)||isEmpty(email))
+    {
+        alert("不能为空")
+        return false;
+    }
+
+    else
+    {
+        var pwd_md5 = document.getElementById("pwd_md5");
+        pwd_md5.value = hex_md5(pwd.value);
+        console.log(checkEmail(email));
+        return true;
+    }
+
 }
 
 /**
